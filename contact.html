@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – Hendrik Hogendijk Hoveniers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── CONTACT HERO ── */
+    .contact-hero { padding: 120px 0 80px; background: var(--bg); }
+    .contact-hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .contact-hero-text .overline {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 14px;
+    }
+    .contact-hero-text h1 {
+      font-size: clamp(32px, 4vw, 52px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -.4px; margin-bottom: 20px;
+    }
+    .contact-hero-text p {
+      font-size: 16px; color: var(--muted); line-height: 1.65; margin-bottom: 8px;
+    }
+    .contact-hero-text .highlight { color: var(--accent); font-weight: 700; }
+    .contact-hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .contact-hero-photo { border-radius: 24px; overflow: hidden; height: 340px; }
+    .contact-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── FORM SECTION ── */
+    .contact-form-sec { background: #eceee8; padding: 80px 0; }
+    .contact-form-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-form-info h2 {
+      font-size: clamp(26px, 3vw, 38px); font-weight: 800;
+      line-height: 1.15; letter-spacing: -.3px; margin-bottom: 20px;
+    }
+    .contact-form-info p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+    .contact-form-info .info-items { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
+    .info-item { display: flex; gap: 12px; align-items: flex-start; }
+    .info-item .icon-box {
+      width: 36px; height: 36px; border-radius: 8px; background: #ddebd0;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .info-item .icon-box svg { width: 16px; height: 16px; }
+    .info-item div p { font-size: 14px; color: var(--muted); margin: 0; }
+    .info-item div strong { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .fg { display: flex; flex-direction: column; gap: 6px; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: 13px; font-weight: 600; color: var(--text); }
+    .fg input, .fg select, .fg textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1.5px solid var(--divider); border-radius: 10px;
+      background: #fff; font-size: 14px; font-family: var(--font);
+      color: var(--text); transition: border-color .2s, box-shadow .2s;
+      outline: none; appearance: none;
+    }
+    .fg input::placeholder, .fg textarea::placeholder { color: #b0b5a8; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(45,90,39,.12);
+    }
+    .fg textarea { resize: vertical; min-height: 120px; }
+    .fg select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+    }
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .radio-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .radio-opt input[type="radio"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+    .radio-opt span { font-size: 14px; color: var(--text); }
+    .check-label {
+      display: flex; align-items: flex-start; gap: 10px;
+      cursor: pointer; font-size: 13px; color: var(--muted); line-height: 1.5;
+    }
+    .check-label input { width: 16px; height: 16px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+    .check-label a { color: var(--accent); text-decoration: underline; }
+    .form-note { font-size: 12px; color: #999; grid-column: 1/-1; }
+    .form-submit-row { grid-column: 1/-1; display: flex; justify-content: flex-end; margin-top: 4px; }
+    .form-success {
+      display: none; background: #ddebd0; border: 1.5px solid var(--accent);
+      border-radius: 12px; padding: 18px 24px; font-size: 15px;
+      color: var(--accent); font-weight: 600; grid-column: 1/-1; text-align: center;
+    }
+    .form-success.show { display: block; }
+
+    /* ── WERKGEBIED ── */
+    .werkgebied { padding: 80px 0; background: var(--bg); }
+    .werkgebied-card {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-radius: 24px; overflow: hidden; border: 1px solid var(--divider);
+    }
+    .werkgebied-map { min-height: 340px; background: #d0dce0; position: relative; }
+    .werkgebied-map iframe { width: 100%; height: 100%; min-height: 340px; border: none; display: block; }
+    .werkgebied-info { padding: 52px; background: #fff; display: flex; flex-direction: column; justify-content: center; }
+    .werkgebied-info h2 { font-size: clamp(22px, 2.5vw, 30px); font-weight: 800; text-align: center; margin-bottom: 32px; }
+    .steden { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+    .steden span {
+      font-size: 15px; color: var(--text); padding: 8px 0;
+      border-bottom: 1px solid var(--divider); font-weight: 500;
+    }
+    .steden span:nth-last-child(-n+2) { border-bottom: none; }
+
+    /* ── FAQ ── */
+    .faq { background: #eceee8; padding: 80px 0; }
+    .faq-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .faq-left h2 { font-size: clamp(24px, 2.8vw, 36px); font-weight: 800; margin-bottom: 36px; }
+    .accordion { border-top: 1px solid var(--divider); }
+    .acc-item { border-bottom: 1px solid var(--divider); }
+    .acc-trigger {
+      width: 100%; background: none; border: none; padding: 20px 0;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      cursor: pointer; text-align: left; font-family: var(--font); gap: 16px;
+    }
+    .acc-trigger:hover { color: var(--accent); }
+    .acc-icon {
+      width: 22px; height: 22px; flex-shrink: 0;
+      border: 1.5px solid var(--divider); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .3s, background .2s;
+    }
+    .acc-icon svg { width: 12px; height: 12px; transition: transform .3s; }
+    .acc-item.open .acc-icon { background: var(--accent); border-color: var(--accent); }
+    .acc-item.open .acc-icon svg { transform: rotate(45deg); }
+    .acc-item.open .acc-icon svg path { stroke: #fff; }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .acc-body-inner { padding: 0 0 20px; font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .acc-item.open .acc-body { max-height: 300px; }
+    .faq-photo { border-radius: 24px; overflow: hidden; height: 380px; margin-top: 56px; }
+    .faq-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .contact-hero-inner, .contact-form-inner, .werkgebied-card, .faq-inner { grid-template-columns: 1fr; }
+      .contact-hero { padding: 110px 0 60px; }
+      .contact-hero-photo { height: 240px; }
+      .werkgebied-map { min-height: 240px; }
+      .faq-photo { margin-top: 0; height: 240px; }
+    }
+    @media (max-width: 560px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .fg.full { grid-column: 1; }
+      .form-submit-row, .form-note, .form-success { grid-column: 1; }
+      .steden { grid-template-columns: 1fr; }
+      .steden span { border-bottom: 1px solid var(--divider) !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <img src="assets/fotos/logo.png" alt="Hendrik Hogendijk Hoveniers" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#benefits">Diensten</a></li>
+        <li><a href="index.html#features">Specificaties</a></li>
+        <li><a href="index.html#howitworks">Zo werkt het</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#form" class="btn btn-green btn-sm">Offerte aanvragen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTACT HERO -->
+  <section class="contact-hero">
+    <div class="container">
+      <div class="contact-hero-inner">
+        <div class="contact-hero-text">
+          <span class="overline">Neem contact op</span>
+          <h1>Vertel ons over uw tuin</h1>
+          <p>Heeft u vragen over tuinonderhoud, tuinaanleg of wilt u een vrijblijvende offerte?</p>
+          <p><span class="highlight">Wij helpen u graag</span> verder.</p>
+          <div class="contact-hero-actions">
+            <a href="tel:+31612345678" class="btn btn-green">Bel ons</a>
+            <a href="#form" class="btn btn-outline">Offerte aanvragen</a>
+          </div>
+        </div>
+        <div class="contact-hero-photo">
+          <img src="assets/fotos/image1.png" alt="Mooie tuin" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="contact-form-sec" id="form">
+    <div class="container">
+      <div class="contact-form-inner">
+
+        <div class="contact-form-info">
+          <h2>Vertel ons<br>over uw tuin</h2>
+          <p>Wilt u tuinonderhoud, een nieuwe tuin of heeft u een andere vraag? Vul het formulier in en wij nemen binnen 1 werkdag contact op.</p>
+          <div class="info-items">
+            <div class="info-item">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d5a27" stroke-width="2" stroke-linecap="round">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div><strong>+31 6 12 34 56 78</strong><p>Ma–Vr 08:00–18:00</p></div>
+            </div>
+            <div class="info-item">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d5a27" stroke-width="2" stroke-linecap="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div><strong>info@hendrikhogendijk.nl</strong><p>Reactie binnen 1 werkdag</p></div>
+            </div>
+            <div class="info-item">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d5a27" stroke-width="2" stroke-linecap="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div><strong>Utrecht en omgeving</strong><p>Zeist · De Bilt · Bilthoven · Bunnik</p></div>
+            </div>
+          </div>
+        </div>
+
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="fg">
+              <label for="voornaam">Voornaam *</label>
+              <input type="text" id="voornaam" name="voornaam" placeholder="Jan" required />
+            </div>
+            <div class="fg">
+              <label for="achternaam">Achternaam *</label>
+              <input type="text" id="achternaam" name="achternaam" placeholder="de Vries" required />
+            </div>
+            <div class="fg full">
+              <label for="email">E-mailadres *</label>
+              <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
+            </div>
+            <div class="fg full">
+              <label for="telefoon">Telefoonnummer</label>
+              <input type="tel" id="telefoon" name="telefoon" placeholder="+31 6 12 34 56 78" />
+            </div>
+            <div class="fg full">
+              <label for="dienst">Welke dienst heeft u nodig? *</label>
+              <select id="dienst" name="dienst" required>
+                <option value="" disabled selected>Kies een dienst…</option>
+                <option value="ontwerp">Tuinontwerp</option>
+                <option value="aanleg">Tuinaanleg</option>
+                <option value="onderhoud">Tuinonderhoud</option>
+                <option value="vijver">Zwemvijver</option>
+                <option value="anders">Anders</option>
+              </select>
+            </div>
+            <div class="fg full">
+              <label>Oppervlakte van uw tuin</label>
+              <div class="radio-group">
+                <label class="radio-opt"><input type="radio" name="opp" value="klein" /><span>Klein (&lt;50 m²)</span></label>
+                <label class="radio-opt"><input type="radio" name="opp" value="middel" /><span>Middel (50–150 m²)</span></label>
+                <label class="radio-opt"><input type="radio" name="opp" value="groot" /><span>Groot (&gt;150 m²)</span></label>
+              </div>
+            </div>
+            <div class="fg full">
+              <label for="bericht">Uw bericht *</label>
+              <textarea id="bericht" name="bericht" placeholder="Beschrijf uw tuin en uw wensen…" required></textarea>
+            </div>
+            <div class="fg full">
+              <label class="check-label">
+                <input type="checkbox" id="privacy" name="privacy" required />
+                Ik ga akkoord met de <a href="#">privacyverklaring</a> en geef toestemming voor het verwerken van mijn gegevens. *
+              </label>
+            </div>
+            <p class="form-note">* Verplichte velden. Wij nemen binnen 1 werkdag contact op.</p>
+            <div class="form-success" id="formSuccess">✓ Bedankt! Uw bericht is verzonden. We nemen snel contact op.</div>
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-green">Offerte aanvragen →</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WERKGEBIED -->
+  <section class="werkgebied">
+    <div class="container">
+      <div class="werkgebied-card">
+        <div class="werkgebied-map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d78946.28!2d5.0919!3d52.0907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c66f4339d32d37%3A0xd6c8fc4c19af4ae9!2sUtrecht!5e0!3m2!1snl!2snl!4v1234567890"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Werkgebied Utrecht en omgeving">
+          </iframe>
+        </div>
+        <div class="werkgebied-info">
+          <h2>Werkgebied<br>Utrecht en omgeving</h2>
+          <div class="steden">
+            <span>Utrecht</span>
+            <span>Bilthoven</span>
+            <span>Zeist</span>
+            <span>Driebergen</span>
+            <span>De Bilt</span>
+            <span>Bunnik</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-inner">
+        <div class="faq-left">
+          <h2>Veelgestelde vragen</h2>
+          <div class="accordion" id="faqAcc">
+
+            <div class="acc-item">
+              <button class="acc-trigger">Hoe snel ontvang ik een offerte?
+                <span class="acc-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+              </button>
+              <div class="acc-body"><div class="acc-body-inner">Na het invullen van het contactformulier nemen wij binnen 1 werkdag contact met u op. De offerte ontvangt u meestal binnen 3 werkdagen na een tuin-inspectie.</div></div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-trigger">Werkt u ook voor bedrijven?
+                <span class="acc-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+              </button>
+              <div class="acc-body"><div class="acc-body-inner">Ja, wij werken zowel voor particulieren als voor bedrijven. Of het nu gaat om een kantoorterrein of een ander commercieel object – wij denken graag met u mee.</div></div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-trigger">Onderhoudt u bestaande tuinen?
+                <span class="acc-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+              </button>
+              <div class="acc-body"><div class="acc-body-inner">Absoluut. Wij bieden onderhoudscontracten aan voor zowel tuinen die wij zelf hebben aangelegd als voor bestaande tuinen.</div></div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-trigger">Wat kost tuinonderhoud?
+                <span class="acc-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#888" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+              </button>
+              <div class="acc-body"><div class="acc-body-inner">De kosten zijn afhankelijk van de grootte en frequentie. Een gemiddelde onderhoudsbeurt begint vanaf €75. Vraag een vrijblijvende offerte aan voor een exacte prijs.</div></div>
+            </div>
+
+          </div>
+        </div>
+        <div class="faq-photo">
+          <img src="assets/fotos/image2.png" alt="Tuin" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <img src="assets/fotos/logo.png" alt="Hendrik Hogendijk Hoveniers" />
+          <p>Professioneel tuinontwerp en -aanleg voor een tuin die bij u past.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Diensten</h4>
+          <ul>
+            <li><a href="index.html#benefits">Tuinontwerp</a></li>
+            <li><a href="index.html#benefits">Tuinaanleg</a></li>
+            <li><a href="index.html#benefits">Tuinonderhoud</a></li>
+            <li><a href="index.html#benefits">Zwemvijvers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#features">Projecten</a></li>
+            <li><a href="index.html#howitworks">Zo werkt het</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#">Utrecht</a></li>
+            <li><a href="mailto:info@hendrikhogendijk.nl">info@hendrikhogendijk.nl</a></li>
+            <li><a href="tel:+31612345678">+31 6 12 34 56 78</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Hendrik Hogendijk Hoveniers. Alle rechten voorbehouden.</span>
+        <span>Privacy &nbsp;·&nbsp; Voorwaarden</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Accordion
+    document.querySelectorAll('.acc-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.acc-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.acc-item.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Form
+    const form = document.getElementById('contactForm');
+    const successMsg = document.getElementById('formSuccess');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        field.style.borderColor = '';
+        if (field.type === 'checkbox') {
+          if (!field.checked) valid = false;
+        } else if (!field.value.trim()) {
+          valid = false;
+          field.style.borderColor = '#c0392b';
+        }
+      });
+      if (!valid) return;
+      const btn = form.querySelector('[type="submit"]');
+      btn.textContent = 'Versturen…'; btn.disabled = true;
+      setTimeout(() => {
+        successMsg.classList.add('show');
+        form.reset();
+        btn.textContent = 'Offerte aanvragen →'; btn.disabled = false;
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1000);
+    });
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => { el.style.borderColor = ''; });
+    });
+  </script>
+
+</body>
+</html>
