@@ -14,7 +14,7 @@
   /* ── Nav: highlight the current section link while scrolling (index page only) ── */
   var navLinks = document.querySelector('.nav-links');
   if (navLinks) {
-    var sections = ['benefits', 'features', 'howitworks'].map(function (id) {
+    var sections = ['benefits', 'features', 'howitworks', 'contact'].map(function (id) {
       return {
         el:   document.getElementById(id),
         link: navLinks.querySelector('a[href="#' + id + '"]')
@@ -25,9 +25,14 @@
       var current = null;
       window.addEventListener('scroll', function () {
         var next = null;
-        sections.forEach(function (s) {
-          if (s.el.getBoundingClientRect().top <= 160) next = s;
-        });
+        var atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50;
+        if (atBottom) {
+          next = sections[sections.length - 1];
+        } else {
+          sections.forEach(function (s) {
+            if (s.el.getBoundingClientRect().top <= 160) next = s;
+          });
+        }
         if (next === current) return;
         current = next;
         navLinks.querySelectorAll('a').forEach(function (a) { a.classList.remove('active'); });

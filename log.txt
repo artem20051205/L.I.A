@@ -1,6 +1,12 @@
-8 juni: Wij hebben een team samengesteld: Lucas, Ivan en ik, en zijn begonnen met analyses.
+8 juni: We hebben een team samengesteld: Lucas, Ivan en ik, en zijn begonnen met de analyse.
 9 juni: Ik ben begonnen met het maken van het eerste prototype van de website in Figma.
 10 juni: Verder gewerkt aan het eerste prototype.
-11 juni: Eerste prototype afgerond; begonnen met het tweede prototype.
-12 juni: Tweede prototype doormaken.
-15 juni: Tweede prototype afgemaakt.
+11 juni: Het eerste prototype afgerond; begonnen aan het tweede prototype.
+12 juni: Verder gewerkt aan het tweede prototype.
+15 juni: Het tweede prototype afgerond.
+17 juni: De presentatie en briefing voorbereid.
+19 juni: Gestart met het programmeren van het project.
+22 juni: Verder gewerkt aan het project, begonnen met de basis van HTML en CSS.
+23 juni: Verder gewerkt aan de CSS van het project.
+26 juni: Begonnen met de contactpagina en de bijbehorende CSS.
+29 juni: De contactpagina afgerond.
