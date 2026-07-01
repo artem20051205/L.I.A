@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl"> <!-- lang="nl" = pagina is in het Nederlands (handig voor zoekmachines en screenreaders) -->
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" /> <!-- tekenset: zorgt dat letters als é en ë goed worden weergegeven -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- viewport: nodig zodat de site goed schaalt op mobiel -->
     <title>Hendrik Hogendijk Hoveniers – Tuinontwerp Utrecht</title>
+    <!-- preconnect: alvast verbinding maken met Google Fonts, zodat het lettertype sneller laadt -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" /> <!-- onze eigen opmaak (CSS) -->
     <link rel="icon" type="image/png" href="assets/fotos/logo.png" />
+    <!-- favicon: het kleine icoontje in het browser-tabblad -->
 </head>
 
 <body>
 
-    <!-- NAV -->
+    <!-- NAVIGATIE (menubalk bovenaan) -->
     <nav>
         <div class="nav-inner">
             <a class="nav-logo" href="index.html">
                 <img src="assets/fotos/logo.png" alt="Hendrik Hogendijk Hoveniers" />
             </a>
+            <!-- Menu-links: href="#benefits" springt naar de sectie met id="benefits" op deze pagina -->
             <ul class="nav-links">
                 <li><a href="#benefits">Diensten</a></li>
                 <li><a href="#features">Specificaties</a></li>
@@ -30,13 +34,16 @@
             <div class="nav-cta">
                 <a href="#contact" class="btn btn-green btn-sm">Neem contact op</a>
             </div>
+            <!-- Hamburger-knop (alleen mobiel). aria-* = toegankelijkheid:
+                 aria-label beschrijft de knop, aria-expanded zegt of het menu open is,
+                 aria-controls verwijst naar het menu dat hij bedient. main.js verandert deze waarden. -->
             <button class="nav-toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
-                <span></span><span></span><span></span>
+                <span></span><span></span><span></span> <!-- de 3 streepjes van de hamburger -->
             </button>
         </div>
     </nav>
 
-    <!-- MOBILE MENU -->
+    <!-- MOBIEL MENU (schermvullend, opent via de hamburger-knop) -->
     <div class="mobile-menu" id="mobileMenu">
         <a href="#benefits">Diensten</a>
         <a href="#features">Specificaties</a>
@@ -44,7 +51,7 @@
         <a href="#contact">Contact</a>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO (groot openingsblok met titel + grote foto) -->
     <header>
         <div class="hero">
             <div class="hero-text">
@@ -63,7 +70,7 @@
         </div>
     </header>
 
-    <!-- LOGO CLOUD -->
+    <!-- LOGO CLOUD (balk met de plaatsen waar gewerkt wordt) -->
     <div class="logo-cloud">
         <div class="logo-cloud-inner">
             <div class="logo-cloud-items">
@@ -95,13 +102,15 @@
         </div>
     </div>
 
-    <!-- BENEFITS -->
+    <!-- VOORDELEN / DIENSTEN. id="benefits" = doel van de menu-link #benefits -->
+    <!-- data-reveal = dit blok faded in zodra je het in beeld scrollt (geregeld door main.js + style.css) -->
     <section class="benefits" id="benefits">
         <div class="container">
             <div class="benefits-head" data-reveal>
                 <span class="overline">Mijn voordelen</span>
                 <h2>Ik weet wat uw tuin nodig heeft.</h2>
-                <p>Met jarenlange ervaring in tuinontwerp bied ik oplossingen die perfect aansluiten bij uw wensen en de natuur.</p>
+                <p>Met jarenlange ervaring in tuinontwerp bied ik oplossingen die perfect aansluiten bij uw wensen en de
+                    natuur.</p>
             </div>
             <div class="benefits-grid" data-reveal>
 
@@ -111,7 +120,8 @@
                     </div>
                     <div class="benefit-card-body">
                         <h3>Tuinontwerp</h3>
-                        <p>Een mooie tuin valt of staat bij een goed ontwerp. Samen werken we aan een tuin die perfect past bij uw huis en wensen.</p>
+                        <p>Een mooie tuin valt of staat bij een goed ontwerp. Samen werken we aan een tuin die perfect
+                            past bij uw huis en wensen.</p>
                     </div>
                 </div>
 
@@ -121,7 +131,8 @@
                     </div>
                     <div class="benefit-card-body">
                         <h3>Tuinaanleg</h3>
-                        <p>Het aanleggen van een tuin doe ik snel en stijlvol. Met kennis en vakmanschap maak ik er een mooie tuin van.</p>
+                        <p>Het aanleggen van een tuin doe ik snel en stijlvol. Met kennis en vakmanschap maak ik er een
+                            mooie tuin van.</p>
                     </div>
                 </div>
 
@@ -151,7 +162,7 @@
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES (uitgelichte blokken: tekst naast foto) -->
     <section class="features" id="features">
         <div class="container">
 
@@ -168,11 +179,13 @@
                 </div>
             </div>
 
+            <!-- class "rev" draait dit blok om: foto links, tekst rechts (zie style.css) -->
             <div class="feature-block rev" data-reveal>
                 <div class="feature-copy">
                     <span class="overline">Meer mogelijkheden</span>
                     <h2>Van vijver tot bloementuin</h2>
-                    <p>Ik stop al mijn energie erin om uw tuin zo mooi mogelijk te maken. Van een mooie vijver tot een sfeervolle bloemenborder – elk detail verdient aandacht. Samen realiseren we uw droomtuin.</p>
+                    <p>Ik stop al mijn energie erin om uw tuin zo mooi mogelijk te maken. Van een mooie vijver tot een
+                        sfeervolle bloemenborder – elk detail verdient aandacht. Samen realiseren we uw droomtuin.</p>
                 </div>
                 <div class="feature-photo">
                     <img src="assets/fotos/image3.png" alt="Groene tuin" />
@@ -182,7 +195,7 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
+    <!-- ZO WERKT HET (stappenplan 01-02-03) -->
     <section class="howitworks" id="howitworks">
         <div class="container">
             <div class="hiw-head" data-reveal>
@@ -192,96 +205,106 @@
                 <div class="step">
                     <div class="step-num">01</div>
                     <h3>Ontwerp</h3>
-                    <p>Samen werk ik aan het ontwerp van uw droomtuin. Met mijn ontwerp breng ik een duidelijk beeld van uw toekomstige tuin.</p>
+                    <p>Samen werk ik aan het ontwerp van uw droomtuin. Met mijn ontwerp breng ik een duidelijk beeld van
+                        uw toekomstige tuin.</p>
                 </div>
                 <div class="step">
                     <div class="step-num">02</div>
                     <h3>Aanleg</h3>
-                    <p>Van tuinontwerp naar werkelijkheid. Ik zorg voor een goed aanlegplan en voer de werkzaamheden met precisie uit voor uw droomtuin.</p>
+                    <p>Van tuinontwerp naar werkelijkheid. Ik zorg voor een goed aanlegplan en voer de werkzaamheden met
+                        precisie uit voor uw droomtuin.</p>
                 </div>
                 <div class="step">
                     <div class="step-num">03</div>
                     <h3>Onderhoud</h3>
-                    <p>Om het hele jaar door optimaal te genieten van uw tuin is goed onderhoud essentieel. Ik neem u graag deze zorg uit handen.</p>
+                    <p>Om het hele jaar door optimaal te genieten van uw tuin is goed onderhoud essentieel. Ik neem u
+                        graag deze zorg uit handen.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- REVIEWS -->
+    <!-- REVIEWS (klantbeoordelingen) -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="reviews-head" data-reveal>
                 <span class="overline">Wat klanten zeggen</span>
                 <h2>Tevreden klanten in de regio</h2>
             </div>
+            <!-- Schuivende balk: main.js kopieert deze kaartjes zodat de lus oneindig doorloopt -->
             <div class="reviews-marquee">
-            <div class="reviews-grid">
+                <div class="reviews-grid">
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"Heel erg bedankt voor de efficiënte service, je was heel snel klaar en ik zal je
-                            nummer zeker behouden om je weer te gebruiken."</blockquote>
-                        <figcaption>Hella Hoes</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <!-- role="img" + aria-label: een screenreader leest "5 van de 5 sterren" i.p.v. de losse ★-tekens -->
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"Heel erg bedankt voor de efficiënte service, je was heel snel klaar en ik zal
+                                je
+                                nummer zeker behouden om je weer te gebruiken."</blockquote>
+                            <figcaption>Hella Hoes</figcaption>
+                        </div>
+                    </figure>
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"Ga alsjeblieft door met de bezoeken aan het huis van mijn vader, want je doet
-                            geweldig werk!"</blockquote>
-                        <figcaption>Henk Haak</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"Ga alsjeblieft door met de bezoeken aan het huis van mijn vader, want je doet
+                                geweldig werk!"</blockquote>
+                            <figcaption>Henk Haak</figcaption>
+                        </div>
+                    </figure>
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"Zoals u weet ben ik altijd tevreden geweest met de service die u de afgelopen
-                            jaren heeft verleend. Vertel me alstublieft wanneer u klaar bent om volgend jaar weer te
-                            beginnen met het maaien van mijn gazons, aangezien ik graag uw diensten wil blijven
-                            ontvangen."</blockquote>
-                        <figcaption>Hans Hogendijk</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"Zoals u weet ben ik altijd tevreden geweest met de service die u de afgelopen
+                                jaren heeft verleend. Vertel me alstublieft wanneer u klaar bent om volgend jaar weer te
+                                beginnen met het maaien van mijn gazons, aangezien ik graag uw diensten wil blijven
+                                ontvangen."</blockquote>
+                            <figcaption>Hans Hogendijk</figcaption>
+                        </div>
+                    </figure>
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"Bedankt voor de grondige opruimbeurt die u aan mijn tuin heeft uitgevoerd. De tuin
-                            is er enorm van opgeknapt en weer bruikbaar gemaakt. Nogmaals bedankt."</blockquote>
-                        <figcaption>Hugo van Heren</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"Bedankt voor de grondige opruimbeurt die u aan mijn tuin heeft uitgevoerd. De
+                                tuin
+                                is er enorm van opgeknapt en weer bruikbaar gemaakt. Nogmaals bedankt."</blockquote>
+                            <figcaption>Hugo van Heren</figcaption>
+                        </div>
+                    </figure>
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"Mijn tuin was een jungle voor en achter. Ik ben zo blij met het resultaat; u heeft
-                            zo hard gewerkt en alles mooi en netjes achtergelaten. Aarzel niet om mijn opmerkingen te
-                            gebruiken in toekomstige advertenties. Nogmaals bedankt voor al je harde werk en
-                            efficiëntie!"</blockquote>
-                        <figcaption>Helga Hagel</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"Mijn tuin was een jungle voor en achter. Ik ben zo blij met het resultaat; u
+                                heeft
+                                zo hard gewerkt en alles mooi en netjes achtergelaten. Aarzel niet om mijn opmerkingen
+                                te
+                                gebruiken in toekomstige advertenties. Nogmaals bedankt voor al je harde werk en
+                                efficiëntie!"</blockquote>
+                            <figcaption>Helga Hagel</figcaption>
+                        </div>
+                    </figure>
 
-                <figure class="review-card">
-                    <div class="review-body">
-                        <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
-                        <blockquote>"We zijn erg blij met ons nieuwe dak van de schuur en het andere werk dat tot een
-                            zeer hoge standaard is voltooid. Heel erg bedankt voor uw medewerking!"</blockquote>
-                        <figcaption>Hopke Havermout-Hoeksteen</figcaption>
-                    </div>
-                </figure>
+                    <figure class="review-card">
+                        <div class="review-body">
+                            <div class="stars" role="img" aria-label="5 van de 5 sterren">★★★★★</div>
+                            <blockquote>"We zijn erg blij met ons nieuwe dak van de schuur en het andere werk dat tot
+                                een
+                                zeer hoge standaard is voltooid. Heel erg bedankt voor uw medewerking!"</blockquote>
+                            <figcaption>Hopke Havermout-Hoeksteen</figcaption>
+                        </div>
+                    </figure>
 
-            </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
+    <!-- CTA = "call to action": laatste oproep om contact op te nemen. id="contact" = doel van menu-link #contact -->
     <section class="cta" id="contact">
         <div class="container">
             <h2>Neem contact op</h2>
@@ -290,13 +313,14 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (onderkant: logo, links en contactgegevens) -->
     <footer>
         <div class="container">
             <div class="footer-top">
                 <div class="footer-logo">
                     <img src="assets/fotos/logo.png" alt="Hendrik Hogendijk Hoveniers" />
-                    <p>Professioneel tuinontwerp en -aanleg voor een tuin die bij u past. Ik maak uw droomtuin werkelijkheid.</p>
+                    <p>Professioneel tuinontwerp en -aanleg voor een tuin die bij u past. Ik maak uw droomtuin
+                        werkelijkheid.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Diensten</h4>
@@ -333,6 +357,7 @@
         </div>
     </footer>
 
+    <!-- main.js helemaal onderaan: zo is de HTML al geladen voordat het script draait -->
     <script src="main.js"></script>
 
 </body>

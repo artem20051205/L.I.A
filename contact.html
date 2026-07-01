@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl"> <!-- lang="nl" = pagina is in het Nederlands -->
 
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" /> <!-- tekenset: letters als é en ë worden goed weergegeven -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- viewport: site schaalt goed mee op mobiel -->
   <title>Contact – Hendrik Hogendijk Hoveniers</title>
+  <!-- preconnect: alvast verbinden met Google Fonts zodat het lettertype sneller laadt -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css" /> <!-- zelfde opmaak (CSS) als de homepagina -->
 </head>
 
 <body>
 
-  <!-- NAV -->
+  <!-- NAVIGATIE (menubalk bovenaan) -->
   <nav>
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">
         <img src="assets/fotos/logo.png" alt="Hendrik Hogendijk Hoveniers" />
       </a>
+      <!-- Links wijzen naar index.html#... omdat die secties op de homepagina staan, niet hier -->
       <ul class="nav-links">
         <li><a href="index.html#benefits">Diensten</a></li>
         <li><a href="index.html#features">Specificaties</a></li>
         <li><a href="index.html#howitworks">Zo werkt het</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li> <!-- class="active": dit is de huidige pagina -->
       </ul>
-      <div class="nav-cta">
-        <a href="#form" class="btn btn-green btn-sm">Offerte aanvragen</a>
-      </div>
+      <!-- Hamburger-knop (mobiel). aria-* = toegankelijkheid; main.js zet aria-expanded op true/false -->
       <button class="nav-toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBIEL MENU (opent via de hamburger-knop) -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="index.html#benefits">Diensten</a>
     <a href="index.html#features">Specificaties</a>
@@ -42,7 +43,7 @@
     <a href="contact.html">Contact</a>
   </div>
 
-  <!-- CONTACT HERO -->
+  <!-- CONTACT HERO (openingsblok met titel + foto) -->
   <section class="contact-hero">
     <div class="container">
       <div class="contact-hero-inner" data-reveal>
@@ -61,15 +62,14 @@
     </div>
   </section>
 
-  <!-- WERKGEBIED -->
+  <!-- WERKGEBIED (Google Maps-kaart + lijst met plaatsen). data-reveal = faded in bij scrollen -->
   <section class="werkgebied">
     <div class="container">
       <div class="werkgebied-card" data-reveal>
         <div class="werkgebied-map">
-          <iframe
-            src="https://maps.google.com/maps?q=Huis+Ter+Heide,+Nederland&z=11&output=embed"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            title="Werkgebied Utrecht en omgeving">
+          <!-- iframe = een ingesloten Google Maps-kaart. loading="lazy" = pas laden als je er bijna bent (sneller) -->
+          <iframe src="https://maps.google.com/maps?q=Huis+Ter+Heide,+Nederland&z=11&output=embed" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Werkgebied Utrecht en omgeving">
           </iframe>
         </div>
         <div class="werkgebied-info">
@@ -88,11 +88,12 @@
   </section>
 
 
-  <!-- FORM -->
+  <!-- FORMULIER. id="form" = doel van de knop "Contact opnemen" (#form) -->
   <section class="contact-form-sec" id="form">
     <div class="container">
       <div class="contact-form-inner">
 
+        <!-- Linkerkolom: contactgegevens met kleine icoontjes -->
         <div class="contact-form-info">
           <h2>Vertel me<br>over uw tuin</h2>
           <p>Wilt u tuinonderhoud, een nieuwe tuin of heeft u een andere vraag? Vul het formulier in en ik neem binnen 1
@@ -100,6 +101,7 @@
           <div class="info-items">
             <div class="info-item">
               <div class="icon-box">
+                <!-- inline SVG = een icoon getekend in de HTML zelf (geen apart plaatje nodig) -->
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                   <path
                     d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
@@ -134,8 +136,11 @@
           </div>
         </div>
 
+        <!-- Het formulier zelf. novalidate = zet de standaard browser-controle uit; wij controleren zelf in het script onderaan -->
         <form id="contactForm" novalidate>
           <div class="form-grid">
+            <!-- label for="voornaam" hoort bij input id="voornaam": klik je op het label, dan springt de cursor in het veld.
+                 required = verplicht veld. placeholder = grijze voorbeeldtekst in een leeg veld. -->
             <div class="fg">
               <label for="voornaam">Voornaam *</label>
               <input type="text" id="voornaam" name="voornaam" placeholder="Jan" required />
@@ -144,16 +149,19 @@
               <label for="achternaam">Achternaam *</label>
               <input type="text" id="achternaam" name="achternaam" placeholder="de Vries" required />
             </div>
-            <div class="fg full">
+            <div class="fg full"> <!-- class "full" = veld over de volle breedte (beide kolommen) -->
               <label for="email">E-mailadres *</label>
               <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required />
+              <!-- type="email": mobiel toont een @-toetsenbord -->
             </div>
             <div class="fg full">
               <label for="telefoon">Telefoonnummer</label>
               <input type="tel" id="telefoon" name="telefoon" placeholder="+31 6 12 34 56 78" />
+              <!-- type="tel": mobiel toont een cijfer-toetsenbord -->
             </div>
             <div class="fg full">
               <label for="dienst">Welke dienst heeft u nodig? *</label>
+              <!-- select = keuzelijst (dropdown). De eerste optie is disabled + selected = niet kiesbaar, dient als titel -->
               <select id="dienst" name="dienst" required>
                 <option value="" disabled selected>Kies een dienst…</option>
                 <option value="ontwerp">Tuinontwerp</option>
@@ -165,6 +173,7 @@
             </div>
             <div class="fg full">
               <label>Oppervlakte van uw tuin</label>
+              <!-- Keuzerondjes: dezelfde name="opp" = je kunt er maar één tegelijk kiezen -->
               <div class="radio-group">
                 <label class="radio-opt"><input type="radio" name="opp" value="klein" /><span>Klein (&lt;50
                     m²)</span></label>
@@ -177,12 +186,14 @@
             <div class="fg full">
               <label for="bericht">Uw bericht *</label>
               <textarea id="bericht" name="bericht" placeholder="Beschrijf uw tuin en uw wensen…" required></textarea>
+              <!-- textarea = groot tekstveld voor meerdere regels -->
             </div>
             <p class="form-note">* Verplichte velden. Ik nemen binnen 1 werkdag contact op.</p>
+            <!-- Succes-melding: standaard verborgen (CSS). Het script voegt class "show" toe na verzenden -->
             <div class="form-success" id="formSuccess">✓ Bedankt! Uw bericht is verzonden. Ik nemen snel contact op.
             </div>
             <div class="form-submit-row">
-              <button type="submit" class="btn btn-green">Offerte aanvragen →</button>
+              <button type="submit" class="btn btn-green">Contact opnemen</button>
             </div>
           </div>
         </form>
@@ -191,7 +202,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (onderkant: logo, links en contactgegevens) -->
   <footer>
     <div class="container">
       <div class="footer-top">
@@ -219,13 +230,13 @@
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
-                    <ul>
-                        <li>Hoefstraat 42</li>
-                        <li>7143HH Huis Ter Heide</li>
-                        <li>hendrikhogendijkhovenier@gmail.com</li>
-                        <li>+31 6 12 34 56 78</li>
-                    </ul>
-                </div>
+          <ul>
+            <li>Hoefstraat 42</li>
+            <li>7143HH Huis Ter Heide</li>
+            <li>hendrikhogendijkhovenier@gmail.com</li>
+            <li>+31 6 12 34 56 78</li>
+          </ul>
+        </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 Hendrik Hogendijk Hoveniers. Alle rechten voorbehouden.</span>
@@ -234,31 +245,37 @@
     </div>
   </footer>
 
+  <!-- main.js: de gedeelde scripts (menu, scroll-effecten enz.) -->
   <script src="main.js"></script>
   <script>
 
-    // Contact form
+    // ── Contactformulier controleren en "versturen" ──
     var form = document.getElementById('contactForm');
     var successMsg = document.getElementById('formSuccess');
+
+    // 'submit' = de gebruiker klikt op verzenden.
     form.addEventListener('submit', function (e) {
-      e.preventDefault();
       var valid = true;
+
+      // Loop door alle verplichte velden ([required]) en controleer of ze ingevuld zijn.
       form.querySelectorAll('[required]').forEach(function (field) {
-        field.style.borderColor = '';
+        field.style.borderColor = ''; // eerst de eventuele rode rand weghalen
+        // .trim() haalt spaties weg; is het veld leeg? dan rode rand + formulier niet geldig.
         if (!field.value.trim()) { valid = false; field.style.borderColor = '#c0392b'; }
       });
+      e.preventDefault(); // altijd voorkomen (geen server-backend)
+
       if (!valid) return;
+
+      // Knop tijdelijk uitzetten zodat je niet 2x kunt klikken.
       var submitBtn = form.querySelector('[type="submit"]');
       submitBtn.textContent = 'Versturen…';
       submitBtn.disabled = true;
-      setTimeout(function () {
-        successMsg.classList.add('show');
-        form.reset();
-        submitBtn.textContent = 'Offerte aanvragen →';
-        submitBtn.disabled = false;
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 1000);
+
+      window.location.href = 'bedankt.html';
     });
+
+    // Zodra je in een veld typt: haal meteen de rode foutrand weg.
     form.querySelectorAll('input, textarea, select').forEach(function (el) {
       el.addEventListener('input', function () { el.style.borderColor = ''; });
     });

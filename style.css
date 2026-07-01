@@ -1,9 +1,14 @@
 
+/* Reset: haalt de standaard marges/padding van de browser weg.
+   box-sizing: border-box = padding + border tellen mee in de breedte (makkelijker rekenen). */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* :root = de hele pagina. Hier staan de CSS-variabelen (custom properties).
+   Je stelt een kleur/waarde 1x in en gebruikt 'm overal met var(--naam).
+   Pas je 'm hier aan, dan verandert de hele site mee. */
 :root {
-    --accent:       #2f6b34;
-    --accent-rgb:   47, 107, 52;
+    --accent:       #2f6b34;     /* hoofdkleur (groen) */
+    --accent-rgb:   47, 107, 52; /* zelfde groen als losse RGB, handig voor rgba() met doorzichtigheid */
     --accent-light: #5a9b6b;
     --accent-ink:   #1c3b22;
     --bg:           #ffffff;
@@ -11,40 +16,44 @@
     --dark:         #0f150d;
     --dark-2:       #16331b;
     --text:         #1b1f18;
-    --muted:        #6c7268;
+    --muted:        #6c7268;     /* gedempte tekstkleur (bijschriften) */
     --divider:      #e3e7dd;
-    --shadow-sm:    0 2px 8px rgba(20, 38, 18, .08);
-    --shadow-md:    0 8px 32px rgba(20, 38, 18, .12);
-    --shadow-lg:    0 24px 60px rgba(20, 38, 18, .16);
-    --radius:       24px;
+    --shadow-sm:    0 2px 8px rgba(20, 38, 18, .08);   /* kleine schaduw */
+    --shadow-md:    0 8px 32px rgba(20, 38, 18, .12);  /* middelgrote schaduw */
+    --shadow-lg:    0 24px 60px rgba(20, 38, 18, .16); /* grote schaduw */
+    --radius:       24px;        /* afronding hoeken */
     --radius-lg:    32px;
     --radius-sm:    16px;
-    --max-w:        1200px;
+    --max-w:        1200px;      /* maximale breedte van de inhoud */
     --font:         'Inter', 'Helvetica Neue', Arial, sans-serif;
+    /* cubic-bezier = de "snelheidscurve" van animaties. Deze begint snel en remt zacht af. */
     --ease:         cubic-bezier(.22, 1, .36, 1);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; } /* zacht doorscrollen bij klik op #anker-links */
 
 body {
     font-family: var(--font);
     background: var(--bg);
     color: var(--text);
     line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* gladdere tekst (vooral op Mac/Safari) */
+    overflow-x: hidden;                  /* geen horizontale scrollbalk */
 }
 
-img { display: block; width: 100%; object-fit: cover; }
+img { display: block; width: 100%; object-fit: cover; } /* object-fit: cover = beeld vult de ruimte, zonder vervorming */
 a   { text-decoration: none; color: inherit; }
 ul  { list-style: none; }
 
+/* :focus-visible = de rand om een element als je met Tab (toetsenbord) navigeert.
+   Belangrijk voor toegankelijkheid / accessibility. */
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 4px;
 }
 
+/* .container = de centrale kolom: maximaal --max-w breed en gecentreerd (margin: 0 auto). */
 .container {
     max-width: var(--max-w);
     margin: 0 auto;
@@ -60,22 +69,23 @@ ul  { list-style: none; }
     display: block;
 }
 
-/* ── BUTTONS ── */
+/* ── KNOPPEN (buttons) ── */
 .btn {
-    display: inline-flex;
+    display: inline-flex;        /* inhoud (tekst + icoon) netjes naast elkaar */
     align-items: center;
     gap: 7px;
     padding: 12px 26px;
-    border-radius: 999px;
+    border-radius: 999px;        /* heel groot getal = volledig ronde (pil-vormige) hoeken */
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     border: none;
     font-family: var(--font);
-    white-space: nowrap;
+    white-space: nowrap;         /* tekst nooit afbreken over 2 regels */
+    /* transition: animeer transform/schaduw/achtergrond soepel bij hover */
     transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
 }
-.btn:hover { transform: translateY(-2px); }
+.btn:hover { transform: translateY(-2px); } /* knop iets omhoog bij hover */
 
 .btn-green {
     background: var(--accent);
@@ -87,11 +97,12 @@ ul  { list-style: none; }
     box-shadow: 0 8px 22px rgba(31, 70, 35, .28);
 }
 
+/* "Liquid glass"-knop: half doorzichtig + backdrop-filter blur = de achtergrond wordt wazig erachter. */
 .btn-outline {
     background: rgba(255, 255, 255, .75);
     color: var(--text);
     border: 1.5px solid rgba(0, 0, 0, .1);
-    -webkit-backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* -webkit- = extra regel voor Safari */
     backdrop-filter: blur(12px);
     box-shadow: var(--shadow-sm);
 }
@@ -102,14 +113,15 @@ ul  { list-style: none; }
 
 .btn-sm { padding: 9px 20px; font-size: 13px; }
 
-/* ── NAV ── */
+/* ── NAVIGATIE (menubalk) ── */
 nav {
-    position: fixed;
+    position: fixed;          /* blijft bovenaan staan tijdens scrollen */
     top: 0; left: 0; right: 0;
-    z-index: 200;
+    z-index: 200;             /* hoge z-index = ligt boven de rest */
     padding: 16px 40px;
 }
 
+/* De zwevende "glazen" balk: half doorzichtig wit + blur (liquid glass). */
 .nav-inner {
     display: flex;
     align-items: center;
@@ -125,6 +137,7 @@ nav {
     box-shadow: 0 2px 16px rgba(0, 0, 0, .07);
     transition: box-shadow .3s var(--ease);
 }
+/* class 'scrolled' wordt door main.js toegevoegd zodra je scrollt: sterkere schaduw. */
 nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
 
 .nav-logo img { height: 64px; width: auto; display: block; }
@@ -135,7 +148,7 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
     list-style: none;
     font-size: 14px;
     font-weight: 500;
-    margin: 0 auto;
+    margin: 0 auto; /* margin: 0 auto duwt het menu naar het midden */
 }
 .nav-links a {
     color: rgba(20, 28, 16, .6);
@@ -143,6 +156,7 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
     border-radius: 999px;
     transition: color .2s, background .2s;
 }
+/* hover én .active (huidige sectie, gezet door main.js) krijgen dezelfde stijl. */
 .nav-links a:hover,
 .nav-links a.active {
     color: var(--accent-ink);
@@ -151,6 +165,7 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
 
 .nav-cta { display: flex; align-items: center; }
 
+/* Hamburger-knop: standaard verborgen, verschijnt pas op mobiel (zie media query onderaan). */
 .nav-toggle {
     display: none;
     width: 44px;
@@ -159,22 +174,25 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
     border: none;
     background: none;
     cursor: pointer;
-    flex-direction: column;
+    flex-direction: column; /* de 3 streepjes onder elkaar */
     align-items: center;
     justify-content: center;
     gap: 5px;
 }
-.nav-toggle span {
+.nav-toggle span { /* één streepje van de hamburger */
     display: block;
     width: 22px; height: 2px;
     border-radius: 2px;
     background: var(--accent-ink);
     transition: transform .3s var(--ease), opacity .2s;
 }
+/* Is het menu open (aria-expanded="true")? Maak van de 3 streepjes een kruisje (X):
+   streep 1 en 3 draaien (rotate) tot een kruis, streep 2 verdwijnt (opacity: 0). */
 .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px)  rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Schermvullend mobiel menu. inset: 0 = top/right/bottom/left allemaal 0 (vult het scherm). */
 .mobile-menu {
     position: fixed;
     inset: 0;
@@ -187,14 +205,17 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
     background: rgba(255, 255, 255, .96);
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
+    /* opacity + visibility = onzichtbaar én "niet aanklikbaar" zolang het dicht is. */
     opacity: 0;
     visibility: hidden;
     transition: opacity .35s var(--ease), visibility .35s;
 }
-.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu.open { opacity: 1; visibility: visible; } /* class 'open' wordt door main.js gezet */
 .mobile-menu a { font-size: 26px; font-weight: 700; color: var(--accent-ink); padding: 12px 24px; }
 .mobile-menu .btn { margin-top: 16px; font-size: 16px; }
 
+/* Scroll-animatie: elementen met data-reveal beginnen onzichtbaar en iets naar beneden.
+   main.js voegt de class 'is-in' toe zodra ze in beeld komen -> ze faden omhoog in beeld. */
 [data-reveal] {
     opacity: 0;
     transform: translateY(24px);
@@ -202,13 +223,13 @@ nav.scrolled .nav-inner { box-shadow: 0 4px 24px rgba(0, 0, 0, .12); }
 }
 [data-reveal].is-in { opacity: 1; transform: none; }
 
-/* ── HERO ── */
+/* ── HERO (groot openingsblok bovenaan) ── */
 header {
-    min-height: 100vh;
+    min-height: 100vh; /* 100vh = 100% van de schermhoogte (volledig scherm) */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(160deg, #edf3e9 0%, #f4f7f2 45%, #eaf1e6 100%);
+    background: linear-gradient(160deg, #edf3e9 0%, #f4f7f2 45%, #eaf1e6 100%); /* zachte kleurverloop-achtergrond */
 }
 
 .hero {
@@ -243,6 +264,8 @@ header {
     border: 1px solid rgba(var(--accent-rgb), .2);
 }
 
+/* clamp(min, ideaal, max) = lettergrootte schaalt mee met het scherm,
+   maar nooit kleiner dan 40px en nooit groter dan 74px. (5.6vw = 5.6% van de schermbreedte). */
 .hero-text h1 {
     font-size: clamp(40px, 5.6vw, 74px);
     font-weight: 700;
@@ -251,7 +274,7 @@ header {
 }
 
 .hero-actions,
-.contact-hero-actions    { display: flex; gap: 12px; flex-wrap: wrap; }
+.contact-hero-actions    { display: flex; gap: 12px; flex-wrap: wrap; } /* flex-wrap: knoppen mogen naar de volgende regel */
 .hero-actions            { justify-content: center; margin-top: 8px; }
 .contact-hero-actions    { margin-top: 28px; }
 
@@ -259,13 +282,13 @@ header {
 
 .hero-mockup-screen {
     border-radius: 24px;
-    overflow: hidden;
+    overflow: hidden;        /* hoeken afronden werkt alleen met overflow: hidden op de afbeelding */
     box-shadow: var(--shadow-lg);
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 10;   /* vaste beeldverhouding 16:10, ongeacht de breedte */
 }
 .hero-mockup-screen img { height: 100%; }
 
-/* ── LOGO CLOUD ── */
+/* ── LOGO CLOUD (balk met partner-logo's) ── */
 .logo-cloud { background: var(--dark); padding: 40px 0; }
 
 .logo-cloud-inner {
@@ -298,11 +321,12 @@ header {
     opacity: .7;
     transition: opacity .25s;
 }
-.logo-cloud-item:hover { opacity: 1; }
+.logo-cloud-item:hover { opacity: 1; } /* logo wordt feller bij hover */
+/* filter: grayscale + brightness = logo's grijs/wit maken zodat ze passen op de donkere balk. */
 .logo-cloud-item img   { height: 40px; width: auto; filter: grayscale(1) brightness(2.2); }
 .logo-cloud-item span  { font-size: 10px; color: #9aa090; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; }
 
-/* ── BENEFITS ── */
+/* ── BENEFITS (voordelen) ── */
 .benefits { padding: 110px 0; }
 
 .benefits-head { margin-bottom: 60px; max-width: 560px; }
@@ -310,6 +334,7 @@ header {
 .benefits-head h2 { font-size: clamp(30px, 3.2vw, 44px); font-weight: 700; line-height: 1.12; letter-spacing: -.8px; }
 .benefits-head p  { font-size: 16px; color: var(--muted); margin-top: 14px; line-height: 1.6; }
 
+/* CSS Grid: 4 even brede kolommen (repeat(4, 1fr)). 1fr = 1 gelijke deel van de ruimte. */
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -326,7 +351,7 @@ header {
     flex-direction: column;
     transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.benefit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.benefit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); } /* kaart "tilt op" bij hover */
 
 .benefit-card-img {
     height: 168px;
@@ -337,24 +362,26 @@ header {
     justify-content: center;
     padding: 26px;
 }
-.benefit-card-img img  { width: 100%; height: 100%; object-fit: contain; }
-.benefit-card-body     { padding: 22px 22px 26px; flex: 1; }
+.benefit-card-img img  { width: 100%; height: 100%; object-fit: contain; } /* object-fit: contain = hele beeld zichtbaar, niet bijgesneden */
+.benefit-card-body     { padding: 22px 22px 26px; flex: 1; } /* flex: 1 = body rekt mee zodat alle kaarten even hoog zijn */
 .benefit-card h3       { font-size: 17px; font-weight: 700; margin-bottom: 9px; }
 .benefit-card p        { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
-/* ── FEATURES ── */
+/* ── FEATURES (uitgelichte onderdelen) ── */
 .features { padding: 110px 0; }
 
+/* Twee kolommen naast elkaar: tekst en foto. */
 .feature-block {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
 }
-.feature-block + .feature-block { margin-top: 100px; }
+.feature-block + .feature-block { margin-top: 100px; } /* "+" = alleen blokken die op een ander blok volgen */
 
-/* .rev flips column order without changing DOM order (better for screen readers).
-   direction:ltr on children restores normal text direction inside each column. */
+/* .rev draait de kolomvolgorde om (foto links, tekst rechts) ZONDER de HTML-volgorde te veranderen
+   -> beter voor screenreaders. direction: rtl draait de kolommen, ltr op de kinderen zet de
+   tekstrichting weer normaal (links-naar-rechts) binnen elke kolom. */
 .feature-block.rev     { direction: rtl; }
 .feature-block.rev > * { direction: ltr; }
 
@@ -373,20 +400,23 @@ header {
 .feature-photo img,
 .contact-hero-photo img { height: 100%; }
 
-/* ── REVIEWS ── */
+/* ── REVIEWS (klantbeoordelingen, donkere balk die schuift) ── */
 .reviews { padding: 110px 0; background: linear-gradient(150deg, var(--dark-2) 0%, var(--dark) 100%); }
 
 .reviews-head { text-align: center; margin-bottom: 56px; }
 .reviews-head .overline { color: var(--accent-light); margin-bottom: 12px; }
 .reviews-head h2 { font-size: clamp(28px, 3.2vw, 42px); font-weight: 700; letter-spacing: -.7px; color: #fff; }
 
-/* soft fade on left/right edges */
+/* mask-image: maakt de linker- en rechterrand zacht doorzichtig (fade),
+   zodat de kaartjes mooi "in het niets" verdwijnen aan de zijkanten. */
 .reviews-marquee {
     overflow: hidden;
     padding: 4px 0;
     mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
+/* width: max-content = de rij is zo breed als alle kaartjes samen (loopt door buiten het scherm).
+   animation = de hele rij schuift continu naar links (zie @keyframes hieronder). */
 .reviews-grid {
     display: flex;
     gap: 22px;
@@ -394,15 +424,18 @@ header {
     padding: 4px;
     animation: reviews-scroll 48s linear infinite;
 }
-.reviews-marquee:hover .reviews-grid { animation-play-state: paused; }
+.reviews-marquee:hover .reviews-grid { animation-play-state: paused; } /* pauzeer bij hover */
 
+/* main.js kopieert alle kaartjes, dus de rij is 2x zo lang.
+   We schuiven precies -50% (de helft) op; dan staat de kopie exact waar het origineel begon
+   en lijkt de lus naadloos/oneindig. (de -11px corrigeert de helft van de gap van 22px). */
 @keyframes reviews-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(calc(-50% - 11px)); }
 }
 
 .review-card {
-    flex: 0 0 340px;
+    flex: 0 0 340px; /* flex: 0 0 340px = vaste breedte 340px, niet groeien/krimpen */
     border-radius: var(--radius);
     background: rgba(255, 255, 255, .07);
     border: 1px solid rgba(255, 255, 255, .12);
@@ -421,12 +454,12 @@ header {
 .review-card blockquote { font-size: 15px; font-weight: 500; line-height: 1.65; color: rgba(255, 255, 255, .9); }
 .review-card figcaption { margin-top: 18px; font-size: 14px; font-weight: 700; color: var(--accent-light); }
 
-/* ── HOW IT WORKS ── */
+/* ── HOE HET WERKT (stappenplan) ── */
 .howitworks  { padding: 110px 0; }
 .hiw-head    { margin-bottom: 60px; }
 .hiw-head h2 { font-size: clamp(30px, 3.2vw, 44px); font-weight: 700; letter-spacing: -.8px; }
 
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; } /* 3 stappen naast elkaar */
 
 .step {
     background: #fff;
@@ -438,6 +471,7 @@ header {
 }
 .step:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
 
+/* Rond nummer-bolletje. width = height + border-radius: 50% = een perfecte cirkel. */
 .step-num {
     font-size: 18px;
     font-weight: 700;
@@ -454,7 +488,7 @@ header {
 .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
 .step p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-/* ── CTA ── */
+/* ── CTA (oproep tot actie, het groene blok onderaan) ── */
 .cta { padding: 40px 0 120px; text-align: center; }
 .cta .container {
     background: var(--bg-tint);
@@ -469,13 +503,14 @@ header {
     line-height: 1.06;
     letter-spacing: -1px;
     max-width: 620px;
-    margin: 0 auto 18px;
+    margin: 0 auto 18px; /* gecentreerd, met 18px ruimte eronder */
 }
 .cta p { font-size: 17px; color: var(--muted); max-width: 420px; margin: 0 auto 36px; }
 
-/* ── FOOTER ── */
+/* ── FOOTER (onderkant van de pagina) ── */
 footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
+/* 4 kolommen: de eerste (logo + tekst) is 2x zo breed als de andere drie. */
 .footer-top {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -485,7 +520,7 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 .footer-logo img    { height: 40px; width: auto; margin-bottom: 16px; filter: brightness(2) grayscale(.3); }
 .footer-logo p      { font-size: 14px; line-height: 1.7; color: #80857a; max-width: 280px; }
 .footer-col h4      { font-size: 13px; font-weight: 700; color: #c8ccc0; margin-bottom: 18px; }
-.footer-col li + li { margin-top: 11px; }
+.footer-col li + li { margin-top: 11px; } /* ruimte tussen lijst-items (niet boven de eerste) */
 .footer-col a       { font-size: 14px; color: #80857a; transition: color .2s; }
 .footer-col a:hover { color: #fff; }
 
@@ -493,18 +528,18 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     border-top: 1px solid #242722;
     padding-top: 28px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* tekst links, tekst rechts (ruimte ertussen) */
     align-items: center;
     font-size: 13px;
     color: #565b50;
 }
 
-/* ── CONTACT ── */
+/* ── CONTACT (contactpagina) ── */
 .contact-hero { padding: 150px 0 70px; }
 
 .contact-hero-inner {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 1.05fr 1fr; /* linker kolom iets breder dan de rechter */
     gap: 64px;
     align-items: center;
 }
@@ -524,7 +559,7 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
 .contact-form-inner {
     display: grid;
-    grid-template-columns: 1fr 1.35fr;
+    grid-template-columns: 1fr 1.35fr; /* formulier (rechts) breder dan de uitleg (links) */
     gap: 56px;
     align-items: start;
 }
@@ -548,6 +583,7 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
 .info-item { display: flex; gap: 14px; align-items: center; }
 
+/* Vierkant icoon-vakje. flex-shrink: 0 = mag niet krimpen, blijft altijd 44x44px. */
 .info-item .icon-box {
     width: 44px; height: 44px;
     border-radius: 14px;
@@ -572,11 +608,12 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     box-shadow: var(--shadow-md);
 }
 
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.fg        { display: flex; flex-direction: column; gap: 6px; }
-.fg.full   { grid-column: 1 / -1; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } /* velden in 2 kolommen */
+.fg        { display: flex; flex-direction: column; gap: 6px; }          /* één veld: label boven invoer */
+.fg.full   { grid-column: 1 / -1; } /* grid-column: 1 / -1 = veld over de volle breedte (beide kolommen) */
 .fg label  { font-size: 13px; font-weight: 600; color: var(--text); }
 
+/* appearance: none = haalt de standaard browser-stijl van invoervelden weg, zodat onze eigen stijl telt. */
 .fg input,
 .fg select,
 .fg textarea {
@@ -594,8 +631,9 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 }
 
 .fg input::placeholder,
-.fg textarea::placeholder { color: #9aa091; }
+.fg textarea::placeholder { color: #9aa091; } /* kleur van de grijze hint-tekst in een leeg veld */
 
+/* :focus = het veld waar je nu in typt: groene rand + zachte gloed (box-shadow). */
 .fg input:focus,
 .fg select:focus,
 .fg textarea:focus {
@@ -603,8 +641,10 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     box-shadow: 0 0 0 3px rgba(var(--accent-rgb), .1);
 }
 
-.fg textarea { resize: vertical; min-height: 120px; }
+.fg textarea { resize: vertical; min-height: 120px; } /* gebruiker mag alleen in hoogte verslepen */
 
+/* Eigen pijltje voor de dropdown (select): een SVG-pijl als achtergrond-afbeelding,
+   rechts uitgelijnd, met extra padding-right zodat de tekst de pijl niet raakt. */
 .fg select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232f6b34' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -614,8 +654,10 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
 .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
 .radio-opt   { position: relative; cursor: pointer; }
+/* De echte radio-knop verbergen we (opacity: 0), maar hij blijft werken/aanklikbaar via het label. */
 .radio-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
 
+/* In plaats daarvan stijlen we de <span> als een knop-pil. */
 .radio-opt span {
     display: inline-flex;
     align-items: center;
@@ -629,9 +671,10 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     color: var(--text);
     transition: border-color .18s, background .18s, color .18s;
     -webkit-user-select: none;
-    user-select: none;
+    user-select: none; /* tekst niet selecteerbaar (voelt meer als een knop) */
 }
 
+/* ::before = een leeg rondje dat we vóór de tekst tekenen: dit is onze zelfgemaakte radio-cirkel. */
 .radio-opt span::before {
     content: '';
     width: 14px; height: 14px;
@@ -642,12 +685,15 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     transition: border-color .18s, background .18s;
 }
 
+/* input:checked + span = "als de verborgen radio aangevinkt is, stijl dan de span ernaast".
+   De + selecteert het element dat er direct op volgt. */
 .radio-opt input:checked+span {
     border-color: var(--accent);
     background: rgba(var(--accent-rgb), .06);
     color: var(--accent-ink);
 }
 
+/* Bij aangevinkt: het rondje wordt groen met een wit "gaatje" (inset box-shadow). */
 .radio-opt input:checked+span::before {
     border-color: var(--accent);
     background: var(--accent);
@@ -657,8 +703,9 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 .radio-opt:hover span { border-color: var(--accent); }
 
 .form-note       { font-size: 12px; color: var(--muted); grid-column: 1/-1; }
-.form-submit-row { grid-column: 1/-1; display: flex; justify-content: flex-end; margin-top: 4px; }
+.form-submit-row { grid-column: 1/-1; display: flex; justify-content: flex-end; margin-top: 4px; } /* knop rechts uitlijnen */
 
+/* Succes-melding: standaard verborgen (display: none), wordt zichtbaar via class 'show' (door JS). */
 .form-success {
     display: none;
     background: rgba(var(--accent-rgb), .08);
@@ -674,11 +721,12 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
 .form-success.show { display: block; }
 
+/* ── WERKGEBIED (kaart + lijst met steden) ── */
 .werkgebied { padding: 90px 0; }
 
 .werkgebied-card {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* links de kaart, rechts de info */
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
@@ -686,7 +734,7 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
 
 .werkgebied-map { min-height: 360px; background: #d0dce0; }
 
-.werkgebied-map iframe {
+.werkgebied-map iframe { /* iframe = de ingesloten Google Maps-kaart */
     width: 100%;
     height: 100%;
     min-height: 360px;
@@ -710,7 +758,7 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     margin-bottom: 32px;
 }
 
-.steden { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.steden { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; } /* steden in 2 kolommen */
 
 .steden span {
     font-size: 15px;
@@ -720,9 +768,12 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     font-weight: 500;
 }
 
+/* :nth-last-child(-n+2) = de laatste 2 items: bij die haal je de onderste lijn weg (netter). */
 .steden span:nth-last-child(-n+2) { border-bottom: none; }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE: andere layout per schermbreedte (media queries) ── */
+
+/* Vanaf 961px breed (desktop/laptop): hero hoger uitlijnen en de mockup laten meerekken. */
 @media (min-width: 961px) {
     header { height: calc(100vh - 174px); min-height: 600px; justify-content: flex-start; }
     .hero  { min-height: 0; justify-content: flex-start; padding-top: 150px; padding-bottom: 24px; gap: 18px; }
@@ -737,39 +788,42 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     .hero-mockup-screen { height: 100%; width: auto; max-width: 100%; aspect-ratio: 3 / 2; }
 }
 
+/* Tot 960px breed (tablet/mobiel): menu verbergen, hamburger tonen, kolommen smaller maken. */
 @media (max-width: 960px) {
     .container    { padding: 0 24px; }
     nav           { padding: 12px 16px; }
     .nav-inner    { padding: 0 12px 0 14px; height: 54px; }
     .nav-logo img { height: 40px; }
-    .nav-links, .nav-cta { display: none; }
-    .nav-toggle   { display: flex; }
+    .nav-links, .nav-cta { display: none; } /* gewone menu verbergen */
+    .nav-toggle   { display: flex; }        /* hamburger tonen */
 
     .hero              { padding: 120px 24px 60px; gap: 22px; }
     .logo-cloud-inner  { padding: 0 24px; }
     .logo-cloud-items  { gap: 6px; padding: 14px; }
 
     .benefits, .features, .howitworks, .reviews { padding: 72px 0; }
-    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; } /* van 4 naar 2 kolommen */
 
+    /* Feature-blokken onder elkaar; direction: ltr zet de .rev-truc weer normaal op mobiel. */
     .feature-block,
     .feature-block.rev { grid-template-columns: 1fr; direction: ltr; gap: 32px; }
     .feature-photo     { height: 280px; }
-    .steps             { grid-template-columns: 1fr; }
+    .steps             { grid-template-columns: 1fr; } /* stappen onder elkaar */
     .footer-top        { grid-template-columns: 1fr 1fr; }
 
     .contact-hero-inner,
     .contact-form-inner,
-    .werkgebied-card    { grid-template-columns: 1fr; }
+    .werkgebied-card    { grid-template-columns: 1fr; } /* alles in 1 kolom */
     .contact-hero       { padding: 120px 0 50px; }
     .contact-hero-photo { height: 260px; }
     .werkgebied-map     { min-height: 260px; }
     #contactForm        { padding: 28px; }
 }
 
+/* Tot 560px breed (kleine telefoons): bijna alles in 1 kolom. */
 @media (max-width: 560px) {
     .benefits-grid  { grid-template-columns: 1fr; }
-    .review-card    { flex-basis: 84%; }
+    .review-card    { flex-basis: 84%; } /* kaartje bijna schermbreed */
     .footer-top     { grid-template-columns: 1fr; gap: 36px; }
     .footer-bottom  { flex-direction: column; gap: 8px; text-align: center; }
     .cta .container { padding: 56px 28px; }
@@ -780,12 +834,13 @@ footer { background: var(--dark); color: #6a6e65; padding: 76px 0 32px; }
     .form-note,
     .form-success  { grid-column: 1; }
     .steden        { grid-template-columns: 1fr; }
-    .steden span   { border-bottom: 1px solid var(--divider) !important; }
+    .steden span   { border-bottom: 1px solid var(--divider) !important; } /* !important = overschrijft de regel hierboven */
 }
 
+/* Heeft de gebruiker "minder beweging" aangezet? Dan alle animaties/overgangen uitzetten (toegankelijkheid). */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
-    .reviews-marquee { overflow-x: auto; }
+    .reviews-marquee { overflow-x: auto; }   /* zelf scrollen i.p.v. automatisch schuiven */
     .reviews-grid    { transform: none !important; }
-    [data-reveal]    { opacity: 1 !important; transform: none !important; }
+    [data-reveal]    { opacity: 1 !important; transform: none !important; } /* meteen zichtbaar, geen fade */
 }
